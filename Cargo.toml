@@ -2,5 +2,9 @@
 name = "expiringdict"
 version = "0.1.0"
 edition = "2021"
+description = "A dict / HashMap whose items expire over time"
+license = "BSD-3-Clause"
+categories = ["data-structures"]
+keywords = ["expiring", "hashmap"]
 
 [dependencies]
