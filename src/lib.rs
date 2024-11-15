@@ -29,7 +29,7 @@ where T: Add<Duration, Output=T> + PartialOrd
     }
   }
 
-  /// Get an item from the dict.
+  /// Get a reference to an item from the dict.
   ///
   /// Remember to call [`expire()`](Self::expire) before calling this method unless you don't care
   /// expired items being returned.
@@ -38,6 +38,17 @@ where T: Add<Duration, Output=T> + PartialOrd
           Q: Hash + Eq + ?Sized
   {
     self.container.get(k).map(|(item, _)| item)
+  }
+
+  /// Get a mutable reference to an item from the dict.
+  ///
+  /// Remember to call [`expire()`](Self::expire) before calling this method unless you don't care
+  /// expired items being returned.
+  pub fn get_mut<Q>(&mut self, k: &Q) -> Option<&mut V>
+    where K: Borrow<Q>,
+          Q: Hash + Eq + ?Sized
+  {
+    self.container.get_mut(k).map(|(item, _)| item)
   }
 
   pub fn insert(&mut self, k: K, v: V) -> Option<V> {
